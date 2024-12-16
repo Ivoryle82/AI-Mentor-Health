@@ -4,7 +4,7 @@ import 'login.dart';
 import 'openai.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart'; // Import the generated firebase_options.dart
+import 'firebase_options.dart'; 
 import 'package:webview_flutter/webview_flutter.dart';
 
 Future<void> main() async {

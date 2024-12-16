@@ -1,5 +1,6 @@
+//works
 import 'package:flutter/material.dart';
-import 'video_webview.dart'; // Import the WebView screen file
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class GuidedMeditationVideosPage extends StatelessWidget {
   final String selectedEthnicity;
@@ -7,15 +8,56 @@ class GuidedMeditationVideosPage extends StatelessWidget {
   GuidedMeditationVideosPage({required this.selectedEthnicity});
 
   final List<Map<String, String>> videos = [
-    {'title': 'Breathing Practice -10 minute guided meditation (American voice)', 'url': 'https://www.youtube.com/watch?v=iuv5EomIA9s', 'ethnicity': 'American'},
-    {'title': '10 minute breath work & light meditation - African American voice', 'url': 'https://www.youtube.com/watch?v=a1oLLA1aDRU', 'ethnicity': 'African American'},
-    {'title': 'Mindful Meditation in Mandarin', 'url': 'https://www.youtube.com/watch?v=rrZV55JjIcg', 'ethnicity': 'Asian'},
-    {'title': '10 minute guided mindfulness meditation - Indian voice', 'url': 'https://www.youtube.com/watch?v=PttMV1xRJv4', 'ethnicity': 'Asian'},
-    {'title': '10 minute mindfulness meditation - American Female voice', 'url': 'https://www.youtube.com/watch?v=ZToicYcHIOU', 'ethnicity': 'American'},
-    {'title': 'Mindfulness Meditation - Guided 10 minutes (American Male Voice)', 'url': 'https://www.youtube.com/watch?v=6p_yaNFSYao&t=453s', 'ethnicity': 'American'},
-    {'title': '10 minute daily meditation for stress relief (American Male Voice)', 'url': 'https://www.youtube.com/watch?v=I9Z4t9ZiUzM&list=PLlldOAYPNHvXcjDp-NT7AT4ZM2KZufddr', 'ethnicity': 'American'},
-    {'title': 'Mindfulness for Overthinking Guided Meditation (American female voice)', 'url': 'https://www.youtube.com/watch?v=MH6uK2-ieb0', 'ethnicity': 'American'},
-    {'title': 'Relaxing Meditation - Hispanic voice', 'url': 'https://www.youtube.com/watch?v=example', 'ethnicity': 'Hispanic'},
+    {
+      'title':
+          'Breathing Practice -10 minute guided meditation (American voice)',
+      'url': 'https://www.youtube.com/embed/iuv5EomIA9s',
+      'ethnicity': 'American'
+    },
+    {
+      'title':
+          '10 minute breath work & light meditation - African American voice',
+      'url': 'https://www.youtube.com/embed/a1oLLA1aDRU',
+      'ethnicity': 'African American'
+    },
+    {
+      'title': 'Mindful Meditation in Mandarin',
+      'url': 'https://www.youtube.com/embed/rrZV55JjIcg',
+      'ethnicity': 'Asian'
+    },
+    {
+      'title': '10 minute guided mindfulness meditation - Indian voice',
+      'url': 'https://www.youtube.com/embed/PttMV1xRJv4',
+      'ethnicity': 'Asian'
+    },
+    {
+      'title': '10 minute mindfulness meditation - American Female voice',
+      'url': 'https://www.youtube.com/embed/ZToicYcHIOU',
+      'ethnicity': 'American'
+    },
+    {
+      'title':
+          'Mindfulness Meditation - Guided 10 minutes (American Male Voice)',
+      'url': 'https://www.youtube.com/embed/6p_yaNFSYao',
+      'ethnicity': 'American'
+    },
+    {
+      'title':
+          '10 minute daily meditation for stress relief (American Male Voice)',
+      'url': 'https://www.youtube.com/embed/I9Z4t9ZiUzM',
+      'ethnicity': 'American'
+    },
+    {
+      'title':
+          'Mindfulness for Overthinking Guided Meditation (American female voice)',
+      'url': 'https://www.youtube.com/embed/MH6uK2-ieb0',
+      'ethnicity': 'American'
+    },
+    {
+      'title': 'Relaxing Meditation - Hispanic voice',
+      'url': 'https://www.youtube.com/embed/example',
+      'ethnicity': 'Hispanic'
+    },
   ];
 
   @override
@@ -50,7 +92,7 @@ class GuidedMeditationVideosPage extends StatelessWidget {
                           onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => VideoWebView(
+                              builder: (context) => WebViewPage(
                                 url: filteredVideos[index]['url']!,
                               ),
                             ),
@@ -91,6 +133,22 @@ class GuidedMeditationVideosPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class WebViewPage extends StatelessWidget {
+  final String url;
+
+  WebViewPage({required this.url});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Video WebView')),
+      body: InAppWebView(
+        initialUrlRequest: URLRequest(url: WebUri(url)),
       ),
     );
   }
@@ -147,7 +205,8 @@ class _SurveyFormState extends State<SurveyForm> {
                 child: Text(video['title']!),
               );
             }).toList(),
-            validator: (value) => value == null ? 'Please select a video' : null,
+            validator: (value) =>
+                value == null ? 'Please select a video' : null,
           ),
           SizedBox(height: 16.0),
           TextFormField(
@@ -160,7 +219,9 @@ class _SurveyFormState extends State<SurveyForm> {
                 problem = value;
               });
             },
-            validator: (value) => value == null || value.isEmpty ? 'Please describe your problem' : null,
+            validator: (value) => value == null || value.isEmpty
+                ? 'Please describe your problem'
+                : null,
           ),
           SizedBox(height: 16.0),
           Text(
